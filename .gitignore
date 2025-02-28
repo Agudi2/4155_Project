@@ -1,0 +1,42 @@
+# 🚀 General Files
+__pycache__/
+*.py[cod]
+*.log
+*.sqlite3
+
+# 🚀 Virtual Environment (venv)
+venv/
+env/
+*.venv
+*.env
+
+# 🚀 Dependencies
+pip-log.txt
+pip-delete-this-directory.txt
+
+# 🚀 Environment Variables
+.env
+.env.local
+.env.production
+.env.development
+
+# 🚀 IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 🚀 MacOS and Windows Files
+.DS_Store
+Thumbs.db
+
+# 🚀 Node.js (Frontend)
+node_modules/
+package-lock.json
+yarn.lock
+
+# 🚀 Build/Deployment Files
+dist/
+build/
+.vercel/
+.netlify/
