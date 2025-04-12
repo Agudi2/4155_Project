@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+face-recognition
+opencv-python
+numpy
+pydantic
+python-multipart
+motor
+passlib
+python-jose
