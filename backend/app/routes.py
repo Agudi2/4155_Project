@@ -2,6 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException
 from app.auth import hash_password, verify_password, create_access_token
 from app.database import users_collection
 from app.models import User
+from fastapi import File, UploadFile
+from app.services import process_image
 
 router = APIRouter()
 
@@ -26,3 +28,13 @@ async def login(user: User):
 
     access_token = create_access_token({"sub": user.username})
     return {"access_token": access_token, "token_type": "bearer"}
+
+@router.post("/detect-faces/")
+async def detect_faces(file: UploadFile = File(...)):
+    if file.content_type not in ["image/jpeg", "image/png"]:
+        raise HTTPException(status_code=400, detail="Invalid file type. Only JPEG and PNG are allowed.")
+    try:
+        result = await process_image(file)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing image: {str(e)}")
