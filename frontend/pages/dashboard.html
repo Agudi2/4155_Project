@@ -7,42 +7,31 @@
   <link rel="stylesheet" href="style.css"/>
   <script defer src="script.js"></script>
 </head>
-<body>
-  <!-- Header/Navbar -->
-  <header>
+<body class="home-page">
+
+  <header class="site-header">
     <div class="logo-container">
-        <img src="/4155_project/frontend/img/logo2.png" alt="FGR Logo" class="logo">
+      <img src="/4155_project/frontend/img/logo2.png" alt="Logo" class="logo" />
     </div>
     <nav>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="register.html">Register</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
-        <button class="nav-button" onclick="toggleNav()">Menu</button>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+      </ul>
+      <div class="user-auth-controls">
+        <span class="user-status" id="userStatus">Not logged in</span>
+        <button id="logoutBtn" style="margin-left: 10px; display: none;">Logout</button>
+      </div>
+      <button class="nav-button" onclick="toggleNav()">Menu</button>
     </nav>
-</header>
+  </header>
 
-  <!-- Optional background grid like homepage -->
-  <div class="grid-container">
-    <div class="plane">
-      <div class="grid"></div>
-      <div class="glow"></div>
-    </div>
-    <div class="plane">
-      <div class="grid"></div>
-      <div class="glow"></div>
-    </div>
-  </div>
-
-  <!-- Main Dashboard Content -->
   <main class="dashboard-content">
     <h1>Dashboard</h1>
     <p>Welcome! Upload an image or start recognition to get started.</p>
 
-    <!-- Upload Section -->
     <section class="upload-section">
       <h2>Upload Image</h2>
       <input type="file" id="imageUpload" accept="image/*" />
@@ -50,13 +39,11 @@
       <button id="startRecognition">Start Recognition</button>
     </section>
 
-    <!-- Preview Section -->
     <section class="preview-section">
       <h2>Image Preview</h2>
       <img id="imagePreview" src="" alt="Preview will appear here" style="display: none;" />
     </section>
 
-    <!-- Results Section -->
     <section class="results-section">
       <h2>Recognition Results</h2>
       <div id="resultsLog">
@@ -64,5 +51,6 @@
       </div>
     </section>
   </main>
+
 </body>
 </html>
