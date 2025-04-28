@@ -1,43 +1,55 @@
-# 🚀 General Files
+# Python cache files
 __pycache__/
-*.py[cod]
-*.log
-*.sqlite3
+*.pyc
+*.pyo
+*.pyd
 
-# 🚀 Virtual Environment (venv)
-venv/
+# Python virtual environment
+.venv/
 env/
-*.venv
-*.env
+ENV/
+venv/
 
-# 🚀 Dependencies
-pip-log.txt
-pip-delete-this-directory.txt
-
-# 🚀 Environment Variables
+# Flask / local environment variables
 .env
-.env.local
-.env.production
-.env.development
-backend/.env
 
-# 🚀 IDE and Editor Files
+# IDE settings (optional but recommended)
 .vscode/
 .idea/
-*.swp
-*.swo
 
-# 🚀 MacOS and Windows Files
+# OS files
 .DS_Store
 Thumbs.db
 
-# 🚀 Node.js (Frontend)
-node_modules/
-package-lock.json
-yarn.lock
+# MongoDB data (if dumped locally)
+dump/
+data/
 
-# 🚀 Build/Deployment Files
-dist/
-build/
-.vercel/
-.netlify/
+# DeepFace model downloads
+~/.deepface/
+.deepface/
+
+# Node modules (if you someday add npm tools for frontend)
+node_modules/
+
+# Logs
+*.log
+
+# Cache or temporary files
+*.bak
+*.swp
+*.tmp
+
+# Any output images or temporary saved captures
+*.jpg
+*.jpeg
+*.png
+outputs/
+uploads/
+
+# Backup files
+*.old
+*.orig
+
+# Misc
+*.sqlite3
