@@ -5,3 +5,5 @@ numpy==2.2.5
 opencv_python==4.11.0.86
 pymongo==4.12.0
 python_bcrypt==0.3.2
+pytest
+pytest-mock
