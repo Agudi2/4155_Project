@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Face Analysis</title>
+</head>
+<body>
+
+    <h1>Analyze Your Face</h1>
+
+    <input type="file" id="uploadInput" accept="image/*"><br><br>
+
+    <video id="video" width="320" height="240" autoplay></video><br>
+    <button id="captureBtn">Capture from Webcam</button><br><br>
+
+    <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+
+    <button id="analyzeBtn">Analyze Photo</button>
+
+    <h2>Results:</h2>
+    <div id="results">
+        Age: <span id="age"></span><br>
+        Gender: <span id="gender"></span><br>
+        Race: <span id="race"></span><br>
+    </div>
+
+    <script>
+    let capturedImage = null;
+
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const uploadInput = document.getElementById('uploadInput');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const captureBtn = document.getElementById('captureBtn');
+
+    // Start webcam
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+            video.srcObject = stream;
+        })
+        .catch((err) => {
+            console.error("Error accessing webcam:", err);
+        });
+
+    captureBtn.addEventListener('click', () => {
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        capturedImage = canvas.toDataURL('image/jpeg');
+        alert("Captured from webcam!");
+    });
+
+    analyzeBtn.addEventListener('click', async () => {
+        let imageToAnalyze = capturedImage;
+
+        if (uploadInput.files.length > 0) {
+            const file = uploadInput.files[0];
+            const reader = new FileReader();
+            reader.onloadend = async function () {
+                imageToAnalyze = reader.result;
+                await sendImageForAnalysis(imageToAnalyze);
+            };
+            reader.readAsDataURL(file);
+        } else if (capturedImage) {
+            await sendImageForAnalysis(capturedImage);
+        } else {
+            alert("Please upload a photo or capture from webcam first.");
+        }
+    });
+
+    async function sendImageForAnalysis(imageData) {
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/analyze', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ image: imageData })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                document.getElementById('age').textContent = data.age;
+                document.getElementById('gender').textContent = data.gender;
+                document.getElementById('race').textContent = data.race;
+            } else {
+                alert(data.error);
+            }
+        } catch (error) {
+            console.error("Error analyzing image:", error);
+            alert("Failed to analyze image.");
+        }
+    }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head><title>Register</title></head>
+<body>
+    <h1>Register</h1>
+    <form id="registerForm">
+        <input type="text" id="username" placeholder="Username" required><br>
+        <input type="password" id="password" placeholder="Password" required><br>
+        <input type="file" id="profilePic"><br>
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const fileInput = document.getElementById('profilePic');
+            let profilePicture = null;
+    
+            if (fileInput && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onloadend = async function () {
+                    profilePicture = reader.result;
+    
+                    await registerUser(username, password, profilePicture);
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                await registerUser(username, password, null);
+            }
+        });
+    
+        async function registerUser(username, password, profilePicture) {
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password, profile_picture: profilePicture })
+                });
+    
+                const data = await response.json();
+    
+                if (response.ok) {
+                    alert(data.message);
+                    window.location.href = "index.html";
+                } else {
+                    alert(data.error);
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                alert('An error occurred during registration.');
+            }
+        }
+        </script>
+
+</body>
+</html>

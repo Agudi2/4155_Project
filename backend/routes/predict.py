@@ -31,8 +31,15 @@ def predict_emotion():
             print("OpenCV failed to decode image")
             return jsonify({"error": "Invalid image"}), 400
 
+        
         print("Running DeepFace.analyze...")
         result = DeepFace.analyze(img, actions=['emotion'], enforce_detection=False)
+
+        # Check for no face detected
+        if isinstance(result, list) and len(result) == 0:
+            return jsonify({"error": "No face detected"}), 200
+        if isinstance(result, dict) and 'dominant_emotion' not in result:
+            return jsonify({"error": "No face detected"}), 200
 
         # Handle DeepFace output
         if isinstance(result, list) and len(result) > 0:
@@ -42,12 +49,16 @@ def predict_emotion():
 
         dominant_emotion = analysis.get('dominant_emotion', 'N/A')
         confidence = analysis.get('emotion', {}).get(dominant_emotion, 0)
+
+        
         if not isinstance(confidence, (int, float)):
             confidence = float(confidence)
 
+       
         raw_details = analysis.get('emotion', {})
         details = {emotion: float(score) for emotion, score in raw_details.items()} if raw_details else {}
 
+        
         raw_region = analysis.get('region', {})
         region = {}
         if raw_region:

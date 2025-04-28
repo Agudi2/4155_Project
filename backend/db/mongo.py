@@ -15,3 +15,9 @@ def init_db(app):
         print("MongoDB connected successfully.")
     except Exception as e:
         print(f"Error connecting to MongoDB: {e}")
+def get_users_collection():
+    global client
+    if not client:
+        raise Exception("Mongo client not initialized.")
+    db = client['emotion_db']
+    return db['users']
