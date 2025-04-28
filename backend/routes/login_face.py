@@ -33,9 +33,8 @@ def login_face():
         for user in users:
             stored_profile = user.get('profile_picture')
             if not stored_profile:
-                continue  # No stored photo, skip
+                continue 
 
-            # Decode stored profile picture
             try:
                 header, encoded_stored = stored_profile.split(',', 1)
                 stored_img = base64.b64decode(encoded_stored)
