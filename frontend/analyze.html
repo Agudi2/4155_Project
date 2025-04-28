@@ -2,26 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Face Analysis</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <h1>Analyze Your Face</h1>
 
-    <input type="file" id="uploadInput" accept="image/*"><br><br>
+    <div class="container">
 
-    <video id="video" width="320" height="240" autoplay></video><br>
-    <button id="captureBtn">Capture from Webcam</button><br><br>
+        <input type="file" id="uploadInput" accept="image/*"><br><br>
 
-    <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+        <video id="video" width="320" height="240" autoplay playsinline style="border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;"></video><br>
 
-    <button id="analyzeBtn">Analyze Photo</button>
+        <button id="captureBtn">Capture from Webcam</button><br><br>
 
-    <h2>Results:</h2>
-    <div id="results">
-        Age: <span id="age"></span><br>
-        Gender: <span id="gender"></span><br>
-        Race: <span id="race"></span><br>
+        <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+
+        <button id="analyzeBtn">Analyze Photo</button>
+
+        <div id="result" style="margin-top:20px;">
+            <div>Age: <span id="age">---</span></div>
+            <div>Gender: <span id="gender">---</span></div>
+            <div>Race: <span id="race">---</span></div>
+        </div>
+
     </div>
 
     <script>
