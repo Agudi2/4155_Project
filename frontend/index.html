@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emotion Recognition</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emotion Recognition</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Emotion Facial Recognition Test</h1>
-    <div class="container">
-        <video id="webcam" width="640" height="480" autoplay playsinline></video>
-        <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
-        <div id="status">Initializing...</div>
-        <div id="result">
-            Emotion: <span id="emotion">---</span><br>
-            Confidence: <span id="confidence">---</span>
-        </div>
-        <div id="details"></div>
-        <button id="captureBtn" disabled>Start Prediction</button>
-    </div>
 
-    <script src="script.js"></script>
+  <h1>Emotion Facial Recognition Test</h1>
+
+  <div class="container">
+
+    <video id="webcam" width="640" height="480" autoplay playsinline></video>
+    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+    <div id="status">Initializing...</div>
+    <div id="result">
+      Emotion: <span id="emotion">---</span><br>
+      Confidence: <span id="confidence">---</span>
+    </div>
+    <div id="details"></div>
+    <div style="margin-top: 20px;">
+      <canvas id="emotionChart" width="400" height="200"></canvas>
+    </div>
+    <button id="captureBtn" disabled>Start Prediction</button>
+    <button id="stopBtn" disabled>Stop Prediction</button>
+  </div>
+
+  <script src="script.js"></script>
+
 </body>
 </html>
