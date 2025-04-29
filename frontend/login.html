@@ -6,6 +6,17 @@
     <title>Login</title>
     <link rel="stylesheet" href="style.css"> 
 <body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Emotion Detection</a></li>
+            <li><a href="analyze.html">Age/Gender Detection</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="profile.html">Profile</a></li> 
+            </ul>
+    </nav>
+    <hr class="nav-divider">
 
     <h1>Login</h1>
 
@@ -50,7 +61,7 @@
 
             if (response.ok) {
                 alert(data.message);
-                window.location.href = "index.html";
+                window.location.href = "profile.html";
             } else {
                 alert(data.error);
             }
@@ -108,7 +119,7 @@
 
             if (response.ok) {
                 alert("Welcome, " + data.username + "!");
-                window.location.href = "index.html";
+                window.location.href = "profile.html";
             } else {
                 alert(data.error);
             }
