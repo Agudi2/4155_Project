@@ -1,9 +1,9 @@
-deepface==0.0.93
-Flask==3.1.0
-flask_cors==5.0.1
-numpy==2.2.5
-opencv_python==4.11.0.86
-pymongo==4.12.0
-python_bcrypt==0.3.2
+deepface
+Flask
+flask_cors
+numpy
+opencv_python
+pymongo
+python_bcrypt
 pytest
 pytest-mock

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-import bcrypt
+from werkzeug.security import generate_password_hash, check_password_hash
 from db.mongo import get_users_collection
 
 register_blueprint = Blueprint('register', __name__)
@@ -19,8 +19,7 @@ def register():
     if users_collection.find_one({"username": username}):
         return jsonify({"error": "Username already exists"}), 409
 
-    password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-    password_hash = password_hash.decode('utf-8')
+    password_hash = generate_password_hash(password)
 
     user_data = {
         "username": username,
@@ -49,8 +48,13 @@ def login():
 
     if not user:
         return jsonify({"error": "Invalid username or password"}), 401
+    
+    stored_password_hash = user.get('password_hash')
 
-    if not bcrypt.checkpw(password.encode('utf-8'), user['password_hash'].encode('utf-8')):
+    if not stored_password_hash:
+        return jsonify({"error": "Invalid username or password"}), 401
+    
+    if not check_password_hash(stored_password_hash, password):
         return jsonify({"error": "Invalid username or password"}), 401
 
     return jsonify({"message": "Login successful"}), 200
