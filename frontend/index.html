@@ -69,9 +69,7 @@
 
   <script src="script.js"></script>
   <script>
-    // This will add any additional JavaScript enhancements without modifying core functionality
     document.addEventListener('DOMContentLoaded', function() {
-      // Add active class to current navigation item
       const currentPage = window.location.pathname.split('/').pop();
       const navLinks = document.querySelectorAll('.navbar a');
       navLinks.forEach(link => {
@@ -81,21 +79,17 @@
         }
       });
 
-      // Add emotion class based on detected emotion
       const updateEmotionIndicator = (emotion) => {
         const emotionElement = document.getElementById('emotion');
         if (emotionElement) {
-          // Remove all existing emotion classes
           emotionElement.className = 'emotion-indicator';
           
-          // Add the specific emotion class
           if (emotion && emotion !== '---' && emotion !== 'Waiting...') {
             emotionElement.classList.add(`emotion-${emotion.toLowerCase()}`);
           }
         }
       };
 
-      // Hook into existing emotion detection
       const originalEmotionSetter = Object.getOwnPropertyDescriptor(
         HTMLElement.prototype, 'textContent'
       ).set;
