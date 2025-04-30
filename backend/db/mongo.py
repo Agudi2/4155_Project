@@ -7,7 +7,7 @@ predictions_collection = None
 
 def init_db(app):
     global client, db, predictions_collection
-    MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
+    MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://user1:1234@cluster0.3c1j4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
     try:
         client = MongoClient(MONGO_URI)
         db = client['emotion_db']

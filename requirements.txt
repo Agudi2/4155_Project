@@ -4,6 +4,6 @@ flask_cors
 numpy
 opencv_python
 pymongo
-python_bcrypt
 pytest
 pytest-mock
+gunicorn
