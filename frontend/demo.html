@@ -28,46 +28,121 @@
       border: 1px solid #ccc;
       border-radius: 5px;
     }
+
+    .input-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .button-center {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .file-label {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .file-label:hover {
+      background: linear-gradient(135deg, #2980b9 0%, #2c3e50 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .comparison-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .image-container {
+      flex: 1;
+      min-width: 320px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .compare-section {
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+    }
+
   </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="navbar">
-  <ul>
-    <li><a href="index.html">Emotion Detection</a></li>
-    <li><a href="analyze.html">Age/Gender Detection</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="login.html">Login</a></li>
-    <li><a href="register.html">Register</a></li>
-    <li><a href="profile.html">Profile</a></li>
-    <li><a href="demo.html">Demo</a></li>
-  </ul>
-</nav>
+  <nav class="navbar">
+    <ul>
+        <li><a href="index.html" class="active"><i class="fas fa-smile-beam"></i> Emotion Detection</a></li>
+        <li><a href="analyze.html"><i class="fas fa-user-check"></i> Age/Gender Analysis</a></li>
+        <li><a href="demo.html"><i class="fas fa-users"></i> Face Comparison</a></li>
+        <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+        <li><a href="register.html"><i class="fas fa-user-plus"></i> Register</a></li>
+        <li><a href="profile.html"><i class="fas fa-id-card"></i> Profile</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+    </ul>
+  </nav>
 <hr class="nav-divider">
 
 <h1>Face Comparison Demo</h1>
 
-<div class='container'>
-  <h2>Image 1</h2>
-  <input type="file" id="file1" accept="image/*"><br>
-  <button onclick="clearImage(1)">Clear Image 1</button><br>
-  <video id="video1" width="320" height="240" autoplay playsinline></video>
-  <button onclick="captureFromWebcam(1)">Capture from Webcam 1</button>
+<div class="comparison-container">
+  <div class="image-container">
+    <h2>Image 1</h2>
+    <div class="input-group">
+      <label for="file1" class="file-label">Choose Image 1</label>
+      <input type="file" id="file1" accept="image/*">
+      <button onclick="clearImage(1)">Clear Image 1</button>
+    </div>
+    <video id="video1" width="320" height="240" autoplay playsinline></video>
+    <div class="button-center">
+      <button onclick="captureFromWebcam(1)">Capture from Webcam 1</button>
+    </div>
+  </div>
+
+  <div class="image-container">
+    <h2>Image 2</h2>
+    <div class="input-group">
+      <label for="file2" class="file-label">Choose Image 2</label>
+      <input type="file" id="file2" accept="image/*">
+      <button onclick="clearImage(2)">Clear Image 2</button>
+    </div>
+    <video id="video2" width="320" height="240" autoplay playsinline></video>
+    <div class="button-center">
+      <button onclick="captureFromWebcam(2)">Capture from Webcam 2</button>
+    </div>
+  </div>
 </div>
 
-<div class='container'>
-  <h2>Image 2</h2>
-  <input type="file" id="file2" accept="image/*"><br>
-  <button onclick="clearImage(2)">Clear Image 2</button><br>
-  <video id="video2" width="320" height="240" autoplay playsinline></video>
-  <button onclick="captureFromWebcam(2)">Capture from Webcam 2</button>
+<div class="compare-section">
+  <button onclick="compareFaces()">Compare Faces</button>
+
+  <h3>Results:</h3>
+  <pre id="result"><code>No comparison made yet.</code></pre>
 </div>
-
-<br><br>
-<button onclick="compareFaces()">Compare Faces</button>
-
-<h3>Results:</h3>
-<pre id="result"><code>No comparison made yet.</code></pre>
 
 <script>
   let img1 = null, img2 = null;
