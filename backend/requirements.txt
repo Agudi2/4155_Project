@@ -7,3 +7,4 @@ pymongo
 pytest
 pytest-mock
 gunicorn
+tf-keras
