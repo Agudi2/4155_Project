@@ -2,8 +2,8 @@ services:
   - type: web
     name: face-recognition-backend
     env: python
-    buildCommand: ""
-    startCommand: gunicorn backend.app:app
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: python backend/app.py
     envVars:
       - key: MONGO_URI
         value: mongodb+srv://user1:1234@cluster0.3c1j4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

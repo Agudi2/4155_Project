@@ -6,5 +6,4 @@ opencv_python
 pymongo
 pytest
 pytest-mock
-gunicorn
 tf-keras
